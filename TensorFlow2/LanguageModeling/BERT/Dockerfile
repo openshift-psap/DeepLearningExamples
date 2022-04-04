@@ -21,10 +21,10 @@ WORKDIR /workspace
 ENV HOME /workspace
 
 WORKDIR /workspace
-RUN git clone https://github.com/openai/gradient-checkpointing.git
-RUN git clone https://github.com/attardi/wikiextractor.git
-RUN git clone https://github.com/soskek/bookcorpus.git
-RUN git clone https://github.com/titipata/pubmed_parser
+RUN git clone https://github.com/openai/gradient-checkpointing.git \
+ && git clone https://github.com/attardi/wikiextractor.git \
+ && git clone https://github.com/soskek/bookcorpus.git \
+ && git clone https://github.com/titipata/pubmed_parser
 
 RUN pip3 install /workspace/pubmed_parser
 
@@ -54,5 +54,5 @@ ENV TF_XLA_FLAGS="--tf_xla_enable_lazy_compilation=false"
 
 ENV TF_DEVICE_MIN_SYS_MEMORY_IN_MB=2048
 
-RUN ln -s download/tfrecord /workspace/bert_tf2/data/
-RUN ln -s /tmp/results /results && mkdir /tmp/results
+RUN ln -s download/tfrecord /workspace/bert_tf2/data/ \
+ && ln -s /tmp/results /results
