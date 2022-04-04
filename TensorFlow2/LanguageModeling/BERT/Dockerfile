@@ -53,3 +53,5 @@ ENV PYTHONPATH="/workspace/wikiextractor:/workspace/bert_tf2:${PYTHONPATH}"
 ENV TF_XLA_FLAGS="--tf_xla_enable_lazy_compilation=false"
 
 ENV TF_DEVICE_MIN_SYS_MEMORY_IN_MB=2048
+
+RUN ln -s download/tfrecord /workspace/bert_tf2/data/
