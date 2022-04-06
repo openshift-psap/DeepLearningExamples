@@ -42,7 +42,14 @@ RUN pip3 install \
   pynvml \
   wget \
   progressbar \
-  git+https://github.com/NVIDIA/dllogger
+  git+https://github.com/NVIDIA/dllogger \
+&& apt-get install -y openssh-server \
+&& mkdir -p /run/sshd \
+&& ssh-keygen -A \
+&& (echo "Host *"; echo "    IdentityFile /root/.ssh/id_rsa") >> /etc/ssh/ssh_config.d/IdentityFile.conf \
+&& (echo "Host *"; echo "    UserKnownHostsFile /dev/null") >> /etc/ssh/ssh_config.d/UserKnownHostsFile.conf \
+&& (echo "Host *"; echo "    StrictHostKeyChecking no") >> /etc/ssh/ssh_config.d/StrictHostKeyChecking.conf \
+&& echo "StrictModes no" > /etc/ssh/sshd_config.d/StrictModes_no.conf
 
 WORKDIR /workspace/bert_tf2
 # Copy model into image - This can be overridden by mounting a volume to the same location.
